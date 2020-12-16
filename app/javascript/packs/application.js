@@ -16,3 +16,6 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 import 'bootstrap';
+import improveDropdown from '../components/select';
+
+improveDropdown();
