@@ -1,14 +1,18 @@
 <%= render 'shared/navbar' %>
-<%# <div class="container"> %>
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path 'cocktails.jpg'  %> );">
+<%= render 'shared/banner' %>
+
 <div class="container">
- <div class = "row justify-content-center">
-  <div class="col-md-8">
-    <h1>Create a cocktail</h1>
-    <%= simple_form_for @cocktail do |f| %>
-      <%= f.input :name %>
-      <%= f.button :submit, class:' btn btn-primary' %>
-    <% end %>
-  </div>
+  <div class = "row justify-content-center">
+    <div class="col-md-8">
+      <h1>Create a cocktail</h1>
+        <%= simple_form_for(@cocktail) do |f| %>
+          <%= f.input :name %>
+          <%#= f.input :photo, as: :file %>
+          <!-- <%= f.association :doses %> -->
+          <!-- <%= f.association :ingredients, as: :radio_buttons %> -->
+          <!-- to read associations document -->
+          <%= f.button :submit, class: "btn btn-primary"  %>
+        <% end %>
+    </div>
  </div>
 </div>
