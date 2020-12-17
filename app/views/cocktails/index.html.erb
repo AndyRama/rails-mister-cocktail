@@ -4,6 +4,7 @@
     <h1>Welcom to andy's bar</h1>
     <p>Bar officiel du batch #484 de Bordeaux</p>
     <%= link_to "Add a cocktail", new_cocktail_path, class: "btn btn-primary btn-lg" %>
+    <%#= link_to "Delete", cocktails_path, method: :delete , class: "btn btn-danger btn-lg"  %>
   </div>
 </div>
 <div class="container">
@@ -19,16 +20,4 @@
     <% end %>
   </div>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <%= render 'shared/footer' %>
