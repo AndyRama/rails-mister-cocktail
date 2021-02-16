@@ -1,16 +1,27 @@
 ## Rails mister cocktails
 
-## Background & Objectives
+# Rails app generation.
 
-Now it's time to make a 3-model app! And you guessed it, we'll be introducing a many to many relationship (`n:n`). So what's the deal? Well, it's time to build a cocktail manager. We want to store our favourite cocktails recipes.
+1. Models.
+2. Seed the ingredients
+3. Routing, Controller, views for Cocktails.
+4. Routing, Controller, views for Doses.
+5. Design as we go
+6. New dose form on the cocktail show page 
+7. Select2 on the ingredients dropdown.
+8. Add reviews.
 
-## Rails app generation
+1. Deploy Mister Cocktail on Heroku.
+2. Add the Image Upload features.
 
-Let's install `yarn` if you haven't already!
+## Background & Objectives I
 
-```bash
-# macOS
-brew install yarn
+Now it's time to make a 3-model app with a many to many relationship (`n:n`).
+Build a cocktail manager, We want to store our favourite cocktails recipes.
+
+Rails app generation
+
+install `yarn`
 
 # Ubuntu
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -18,21 +29,19 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt-get update && sudo apt-get install yarn
 ```
 
-**Note**: You should now be able to run these steps without this cheat sheet! Don't forget the `--database=postgresql` (we will talk about this tomorrow). 😉
-
 ```bash
 cd ~/code/<user.github_nickname>
 rails new rails-mister-cocktail --database=postgresql --skip-action-mailbox -T
 cd rails-mister-cocktail
 ```
 
-We then need to create the postgresql database for this new rails app.
+Create the postgresql database for this new rails app.
 
 ```bash
 rails db:create
 ```
 
-Let's set up git, create a repo on GitHub and push our skeleton.
+Set up git, create a repo on GitHub and push our skeleton.
 
 ```bash
 git add .
@@ -41,7 +50,7 @@ gh repo create
 git push origin master
 ```
 
-Let's import the teacher's spec to be able to `rake` our progress.
+Import the Wagon's spec to be able to `rake` our progress.
 
 ```bash
 echo "gem 'rspec-rails', '4.0.0.beta3', group: [ :test ]" >> Gemfile
@@ -49,19 +58,19 @@ echo "gem 'rails-controller-testing', group: [ :test ]" >> Gemfile
 bundle install
 rails db:migrate
 rails db:test:prepare
-git submodule add https://github.com/lewagon/fullstack-challenges-04-Rails-mister-cocktail-specs.git spec
+git submodule add https://github.com/XXX/XXXXX-specs.git spec
 git add .
 git commit -m "Prepare rails app with external specs"
 ```
 
-You'll be able to test your code with:
+Test your code with:
 
 ```bash
 rails db:migrate RAILS_ENV=test  # If you added a migration
 rspec spec/models                # Launch tests
 ```
 
-Before starting to code, don't forget to setup your Rails app for Front-end, like in this morning's lecture let's add Bootstrap and it's JavaScript dependencies
+Setup your Rails app for Front-end, add Bootstrap and JavaScript dependencies
 
 ```bash
 yarn add bootstrap jquery popper.js
@@ -81,11 +90,11 @@ bundle install
 rails generate simple_form:install --bootstrap
 ```
 
-Then let's download the Le Wagon's stylesheets:
+Download the Le Wagon's stylesheets:
 
 ```bash
 rm -rf app/assets/stylesheets
-curl -L https://github.com/lewagon/stylesheets/archive/master.zip > stylesheets.zip
+curl -L https:///XXX/XXXXX-stylesheets/archive/master.zip > stylesheets.zip
 unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-master app/assets/stylesheets
 ```
 
@@ -102,7 +111,7 @@ To enable Bootstrap responsiveness you will also need to add the following to yo
   <!-- [...] -->
 ```
 
-Finally let's import Boostrap JS library using webpack:
+Finally Import Boostrap JS library using webpack:
 
 ```js
 // config/webpack/environment.js
@@ -125,31 +134,21 @@ module.exports = environment
 import 'bootstrap';
 ```
 
-Don't forget to `commit` and `push` your work often.
-
 ## Specs
 
 ### 1 - Models
 
-Go to [db.lewagon.com](http://db.lewagon.com) and draw the schema with your buddy. The tables
-we need are `cocktails`, `ingredients` and `doses`. Think about the relations between the tables and who is storing the *references*. 😉
+Draw the schema. The tables need are `cocktails`, `ingredients` and `doses`.
+Think about the relations between the tables and who is storing the *references*. 😉
 
 ![](https://raw.githubusercontent.com/lewagon/fullstack-images/master/rails/mister_cocktail_d1/db.png)
-
-**Important**
-Don't use `rake` but:
-
-```bash
-rspec spec/models
-```
-
-to only run tests in the `spec/models` folder. Make sure they're all green before moving on to the applicative part of the challenge.
 
 #### Attributes
 
 - A **cocktail** has a name (e.g. `"Mint Julep"`, `"Whiskey Sour"`, `"Mojito"`)
 - An **ingredient** has a name (e.g. `"lemon"`, `"ice"`, `"mint leaves"`)
-- A **dose** is the amount needed for each ingredient in a cocktail (e.g. the Mojito cocktail needs **6cl** of lemon). So each dose references a cocktail, an ingredient and has a description.
+- A **dose** is the amount needed for each ingredient in a cocktail (e.g. the Mojito cocktail needs **6cl** of lemon). So each dose references a cocktail, an    
+  ingredient and has a description.
 
 #### Validation
 
@@ -218,7 +217,7 @@ POST "cocktails"
 ### 4 - Routing, Controller, Views for Doses
 
 - A user can add a new dose (ingredient/description pair) to an existing cocktail
-- Checkout `simple_form` ,about `f.association` to easily create a select dropdown for our list of ingredients.
+- Checkout `simple_form` about `f.association` to easily create a select dropdown for our list of ingredients.
 
 ```
 GET "cocktails/42/doses/new"
@@ -257,3 +256,129 @@ Let's try adding an npm package to our rails app! Let's follow the slides to see
 
 - Adding a possibility to search cocktails and adding `typed.js` to the search input field.
 - Some nice [animate on scroll](https://michalsnik.github.io/aos/) animations for our list of cocktails as we scroll down the index.
+
+## Background & Objectives II
+
+1. Deploy Mister Cocktail on Heroku
+2. Add the Image Upload features
+
+### Setup
+
+```bash
+cd ~/code/<user.github_nickname>/rails-mister-cocktail
+```
+
+If you generated the rails app **without** the `--database` flag, we need to manually migrate this Rails app to Postgresql for heroku.
+You can check if the app is configured with postgresql if you have the `pg` gem in the gemfile.
+
+If you need to change the app to postgres, open your Gemfile, find the `sqlite` line. **Replace** it with:
+
+```ruby
+# Gemfile
+gem "pg"
+```
+
+Open the `config/database.yml` file, **delete** everything in it and replace it with:
+
+```yaml
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: rails-mister-cocktail_development
+
+test:
+  <<: *default
+  database: rails-mister-cocktail_test
+```
+
+Open your terminal and run:
+
+```bash
+rails db:create
+rails db:migrate
+rails db:seed
+```
+
+### Deployment on heroku
+
+curl https://cli-assets.heroku.com/install.sh | sh  # install on Ubuntu 
+
+heroku login                                        # login
+
+heroku create $YOUR_APP_NAME --region eu            # Create an Heroku app
+
+git remote -v                                       # remote ?    
+ 
+git push origin master                              # git repo
+ 
+git push heroku master                              # heroku repo
+ 
+heroku logs --tail                                  # logs on heroku
+    
+heroku run <command>                                # Syntax
+
+heroku run rails db:migrate                         # Run pending migrations in prod
+  
+heroku run rails c                                  # Run the production console
+
+### Image Upload 
+
+**add a picture** to the `Cocktail` model. The user should be able to upload an image that will then be displayed on the `index` view
+of `Cocktail` as a thumbnail. On the `show` view of `Cocktail`, the same image should be displayed, but bigger!
+
+# Gemfile
+gem 'dotenv-rails', groups: [:development, :test]
+
+bundle install
+
+touch .env
+echo '.env*' >> .gitignore
+
+git status                                           # .env should not be there, we don't want to push it to Github.
+git add .
+git commit -m "Add dotenv - Protect my secret data in .env file"
+
+## Cloudinary & Environment
+
+# Gemfile
+gem 'cloudinary', '~> 1.16.0'
+
+bundle install
+
+# .env
+CLOUDINARY_URL=cloudinary://298522699261255:Qa1ZfO4syfbOC-***********************8
+
+## Active strorage
+
+first of all, I creates two tables in the database to handle the associations between our pictures uploaded on Cloudinary and any Model in our app.
+
+rails active_storage:install
+rails db:migrate
+
+# config/storage.yml
+cloudinary:
+  service: Cloudinary
+
+# config/environments/development.rb
+config.active_storage.service = :cloudinary
+
+## Production
+
+Replace ``:local`` by ``:cloudinary`` in the config:
+
+# config/environments/production.rb
+
+config.active_storage.service = ``:cloudinary``
+
+heroku config:set CLOUDINARY_URL=cloudinary://166....
+
+heroku config                                           #Check it !
+
+### Cocktail Reviews (Optional)
+
+If you're done with the images, try to add an anonymous review system to the cocktails.
+
