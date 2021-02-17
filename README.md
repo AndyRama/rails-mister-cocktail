@@ -1,6 +1,6 @@
 ## Rails mister cocktails
 
-## Work-flow step by step, use a pattern MVC with a DB (ProgreSQL).
+## Work-flow step by step, use a pattern MVC with a DB (PostgreSQL).
 
 1. Models.
 2. Seed the ingredients
