@@ -1,6 +1,6 @@
 ## Rails mister cocktails
 
-# Rails app generation.
+## Work-flow step by step, use a pattern MVC with a DB (ProgreSQL).
 
 1. Models.
 2. Seed the ingredients
@@ -21,9 +21,13 @@ Build a cocktail manager, We want to store our favourite cocktails recipes.
 
 Rails app generation
 
+```bash
 install `yarn`
+```
 
 # Ubuntu
+
+```bash
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt-get update && sudo apt-get install yarn
