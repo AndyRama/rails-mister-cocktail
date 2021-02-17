@@ -304,79 +304,123 @@ rails db:seed
 ```
 
 ### Deployment on heroku
-
+```bash
 curl https://cli-assets.heroku.com/install.sh | sh  # install on Ubuntu 
+```
 
+```bash
 heroku login                                        # login
+```
 
+```bash
 heroku create $YOUR_APP_NAME --region eu            # Create an Heroku app
+```
 
+```bash
 git remote -v                                       # remote ?    
- 
-git push origin master                              # git repo
- 
-git push heroku master                              # heroku repo
- 
-heroku logs --tail                                  # logs on heroku
-    
-heroku run <command>                                # Syntax
+```
 
+```bash
+git push origin master                              # git repo
+```
+
+```bash
+git push heroku master                              # heroku repo
+```
+
+```bash
+heroku logs --tail                                  # logs on heroku
+```
+
+```bash
+heroku run <command>                                # Syntax
+```
+
+```bash
 heroku run rails db:migrate                         # Run pending migrations in prod
-  
+```
+
+```bash
 heroku run rails c                                  # Run the production console
+```
 
 ### Image Upload 
 
 **add a picture** to the `Cocktail` model. The user should be able to upload an image that will then be displayed on the `index` view
 of `Cocktail` as a thumbnail. On the `show` view of `Cocktail`, the same image should be displayed, but bigger!
 
+```ruby
 # Gemfile
 gem 'dotenv-rails', groups: [:development, :test]
+```
 
+```bash
 bundle install
+```
 
+```bash
 touch .env
 echo '.env*' >> .gitignore
+```
 
+```bash
 git status                                           # .env should not be there, we don't want to push it to Github.
 git add .
 git commit -m "Add dotenv - Protect my secret data in .env file"
+```
 
 ## Cloudinary & Environment
 
+```ruby
 # Gemfile
 gem 'cloudinary', '~> 1.16.0'
+```
 
+```bash
 bundle install
+```
 
+```bash
 # .env
 CLOUDINARY_URL=cloudinary://298522699261255:Qa1ZfO4syfbOC-***********************8
-
+```
 ## Active strorage
 
-first of all, I creates two tables in the database to handle the associations between our pictures uploaded on Cloudinary and any Model in our app.
+Creates two tables in the database to handle the associations between our pictures uploaded on Cloudinary and any Model in our app.
 
+```bash
 rails active_storage:install
 rails db:migrate
-
+```
+```bash
 # config/storage.yml
 cloudinary:
-  service: Cloudinary
+service: Cloudinary
+```
 
+```ruby
 # config/environments/development.rb
 config.active_storage.service = :cloudinary
+```
 
-## Production
-
+```ruby
+# Production
 Replace ``:local`` by ``:cloudinary`` in the config:
+```
 
 # config/environments/production.rb
 
+```ruby
 config.active_storage.service = ``:cloudinary``
+```
 
+```ruby
 heroku config:set CLOUDINARY_URL=cloudinary://166....
+```
 
+```ruby
 heroku config                                           #Check it !
+```
 
 ### Cocktail Reviews (Optional)
 
